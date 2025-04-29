@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>test</title>
+  <script src="abc-basic.js" type="text/javascript"></script>
+  <script src="vue.js" type="text/javascript"></script>
+</head>
+<body>
+    <div id="app1">
+        <button v-on:click="refresh">next</button>　
+        <button v-on:click="treble">treb</button>
+        <button v-on:click="bass">bass</button>　
+
+        <button v-on:click="rup">+</button>
+        {{ range }}
+        <button v-on:click="rdown">-</button>
+    </div>
+
+    <div id="paper"></div>
+  
+  
+  <script>
+
+
+    function rend(_part,_rg){
+        const onpus=[["G,","A,","B,","C","D","E","F","G","A","B","c","d","e","f","g"],
+        ["C,","D,","E,","F,","G,","A,","B,","C","D","E","F","G","A","B","c","d","e","f"]];
+        const _onpus_max=onpus[_part].length;
+
+        let os=[];
+        let _prev_onpu=-1;
+        let sc="";
+        for(let i=0;i<4;i++){
+            j=getRandomInt(_onpus_max,_prev_onpu,_rg);
+            os.push(j);
+            _prev_onpu=j;
+            sc=sc+onpus[_part][j]+"2";
+        } 
+        console.log(os);
+
+        let Kfld="[K: clef=treble ]";
+        if(_part==1){
+            Kfld="[K: clef=bass octave=-1 ]";
+        }
+        ABCJS.renderAbc("paper", "X:1\n"+Kfld+"\n"+sc+"\n");
+
+    }
+
+
+
+    function getRandomInt(max,exp,rg=5) {
+        let flg=0;
+        let ret=0;
+        while(true){
+            ret=Math.floor(Math.random() * max);
+            if(exp==-1){
+                return ret;
+            }
+            if(ret==exp){
+                continue;
+            }
+            if(ret<exp+rg && ret>exp-rg){
+                return ret;
+            }
+        }
+    }
+
+
+    const App1 = { //Vueコンポーネントを定義
+      data() { //dataメソッドを定義 Vue.jsにこのデータを返すという宣言
+        return {
+          keyt: 0,
+          range: 5
+        }
+      },
+      methods: { //methodsメソッドを定義
+        treble() {
+          this.keyt=0
+          rend(0,this.range)
+        },
+        bass(){
+          this.keyt=1
+          rend(1,this.range)
+        },
+        refresh(){
+          rend(this.keyt,this.range)
+        },
+        rup(){
+            this.range+=1
+            rend(this.keyt,this.range)
+        },
+        rdown(){
+            this.range-=1
+            if(this.range<2){
+                this.range=2
+            }
+            rend(this.keyt,this.range)
+        }
+      }
+    }
+    app1 = Vue.createApp(App1) //Vueアプリケーションを作成
+    app1.mount('#app1') //VueアプリケーションをHTML要素にマウント
+
+
+
+    rend(0);
+
+
+
+  </script>
+  
+</body>
+</html>
