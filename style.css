@@ -19,5 +19,8 @@
   button {
     font-size: 20px;
   }
-  
+  button.btn1 {
+    font-size: 30px;
+  }
+
 }
