@@ -3,20 +3,21 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
   <title>test</title>
   <script src="abc-basic.js" type="text/javascript"></script>
   <script src="vue.js" type="text/javascript"></script>
 </head>
 <body>
     <div id="app1">
-        <button v-on:click="refresh" class="btn0">next</button>　
+
         <button v-on:click="treble">treb</button>
         <button v-on:click="bass">bass</button>　
 
         <button v-on:click="rup">+</button>
         {{ range }}
-        <button v-on:click="rdown">-</button>
+        <button v-on:click="rdown">-</button><br><br>
+        <button v-on:click="refresh" class="btn1">next</button>
     </div>
 
     <div id="paper"></div>
