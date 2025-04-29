@@ -1,6 +1,8 @@
 const canvas = document.getElementById("canv");
 const ctx = canvas.getContext("2d");
 
+abcjs.renderAbc("paper", "X:1\nK:D\nDD AA|BBA2|\n");
+
 ctx.lineWidth = 3;
 
 ctx.beginPath();
