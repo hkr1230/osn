@@ -16,5 +16,8 @@
   .block {
     width: 100%;
   }
-
+  .btn0 {
+    width: full;
+  }
+  
 }
